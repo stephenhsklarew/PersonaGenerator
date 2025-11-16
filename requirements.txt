@@ -1,0 +1,18 @@
+# PersonaGenerator Dependencies
+
+# Web scraping
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# AI Integration (uses UnifiedLLMClient from parent directory)
+# UnifiedLLMClient dependencies:
+# - anthropic>=0.39.0
+# - openai>=1.0.0
+# - google-generativeai>=0.3.0
+
+# Data handling
+requests>=2.31.0
+
+# Optional: For better parsing
+beautifulsoup4>=4.12.0
+lxml>=4.9.0

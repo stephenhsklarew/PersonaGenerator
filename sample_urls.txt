@@ -1,0 +1,16 @@
+# Sample LinkedIn URLs for Persona Generation
+# Add one URL per line
+# Lines starting with # are comments
+
+# Example format:
+# https://www.linkedin.com/in/username1/
+# https://www.linkedin.com/in/username2/
+# https://www.linkedin.com/in/username3/
+
+# Instructions:
+# 1. Replace these example URLs with actual LinkedIn profile URLs
+# 2. Include 3-10 profiles that represent your target audience
+# 3. The more profiles you include, the more accurate the composite persona
+# 4. Ensure profiles are similar in role, industry, or target characteristics
+
+# Add your URLs below:
