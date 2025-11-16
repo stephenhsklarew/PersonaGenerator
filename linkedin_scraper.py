@@ -84,6 +84,9 @@ class LinkedInScraper:
                 'education': self._extract_education(),
                 'skills': self._extract_skills(),
                 'posts': self._extract_recent_posts(),
+                # Additional metadata for evidence tables
+                'connections': self._extract_connections(),
+                'industry': self._extract_industry(),
             }
 
             return profile
@@ -285,6 +288,51 @@ class LinkedInScraper:
             pass
 
         return posts
+
+    def _extract_connections(self) -> str:
+        """Extract connection count"""
+        try:
+            selectors = [
+                "span.t-bold",
+                "span[class*='connection-count']",
+            ]
+
+            for selector in selectors:
+                try:
+                    elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                    for elem in elements:
+                        text = elem.text.strip()
+                        if 'connection' in text.lower():
+                            return text
+                except NoSuchElementException:
+                    continue
+
+            return ""
+        except Exception:
+            return ""
+
+    def _extract_industry(self) -> str:
+        """Extract industry from headline or experience"""
+        try:
+            # Often industry is implied in the headline or first experience
+            headline = self._extract_headline()
+            experience = self._extract_experience()
+
+            # Try to infer from headline keywords
+            if any(word in headline.lower() for word in ['tech', 'software', 'saas', 'engineering']):
+                return "Technology"
+            elif any(word in headline.lower() for word in ['finance', 'fintech', 'banking']):
+                return "Financial Services"
+            elif any(word in headline.lower() for word in ['health', 'medical', 'pharma']):
+                return "Healthcare"
+            elif any(word in headline.lower() for word in ['consult', 'advisor']):
+                return "Consulting"
+            elif any(word in headline.lower() for word in ['education', 'edtech', 'school', 'university']):
+                return "Education"
+
+            return ""
+        except Exception:
+            return ""
 
     def __del__(self):
         """Cleanup driver on deletion"""
